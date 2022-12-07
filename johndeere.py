@@ -3,9 +3,6 @@ from sklearn.metrics import r2_score
 import math
 import csv
 
-##jdstock = pd.read_csv('johndeere.csv', usecols = ['average'])
-##corn = pd.read_csv('corn.csv', usecols = ['average'])
-##soybeans = pd.read_csv('soybean.csv', usecols = ['average'])
 jdstock = []
 corn = []
 soybean = []
