@@ -3,6 +3,7 @@ from sklearn.metrics import r2_score
 import math
 import csv
 
+
 jdstock = []
 corn = []
 soybean = []
@@ -22,6 +23,8 @@ jd2 = 0
 soy2 = 0
 corn2 = 0
 combine = 0
+diffjd = 0
+diff = 0
 while True:
     input = input("Do you want to find John Deeres stock correlation with corn or soybeans? ")
     if input == 'corn':
@@ -37,7 +40,14 @@ while True:
             corn2 += (float(corn[x][1]) - mean)**2
             combine += jd1 * corn1
         r = (combine) / math.sqrt(jd2 * corn2)
-        print(f"The correlation between John Deere stock price and corn is {round(r, 2)} and the r^2 value is {round(r**2, 2)}")
+        print(f"The correlation(r) between John Deeres stock price and corn is {round(r, 2)} and the r^2 value is {round(r**2, 2)}")
+        for c in range(0, len(jdstock) - 1):
+            if float(corn[c][1]) > float(corn[c+1][1]):
+                diff += float(corn[c][1]) - float(corn[c+1][1])
+                diffjd += float(jdstock[c][1]) - float(jdstock[c+1][1])
+            else:
+                continue
+        print(f"Per dollar that corn increases the stock price of John Deere increases ${round(diffjd / diff, 2)}")
         break
     if input == 'soybeans':
         for i in range(0, len(jdstock)):
@@ -52,5 +62,12 @@ while True:
             soy2 += (float(soybeans[x][1]) - mean)**2
             combine += jd1 * soy1
         r = (combine) / math.sqrt(jd2 * soy2)
-        print(f"The correlation between John Deere stock price and soybeans is {round(r, 2)} and the r^2 value is {round(r**2, 2)}")
+        print(f"The correlation(r) between John Deeres stock price and soybeans is {round(r, 2)} and the r^2 value is {round(r**2, 2)}")
+        for c in range(0, len(jdstock) - 1):
+            if float(soybeans[c][1]) > float(soybeans[c+1][1]):
+                diff += float(soybeans[c][1]) - float(soybeans[c+1][1])
+                diffjd += float(jdstock[c][1]) - float(jdstock[c+1][1])
+            else:
+                continue
+        print(f"Per dollar that soybeans increases the stock price of John Deere increases ${round(diffjd / diff, 2)}")
         break
